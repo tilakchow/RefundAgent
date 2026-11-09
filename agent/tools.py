@@ -29,3 +29,12 @@ def calculate_right_refund(user:str, item: list[PurchaseItem])-> str:
         for item in items :
             if users_data[user].get(item.name):
                 total_refund += users_data[user][items.name]["price"]
+
+
+        return f"the value of the refund is : {total_refund}"
+
+    return {"status": "there was no username found"}
+
+    @tool
+    def issue_refund_ticket(refund_amount: int) -> str :
+        """this tool """            
