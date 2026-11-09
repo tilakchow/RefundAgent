@@ -12,3 +12,11 @@ from uuid import uuid4
 
 load_dotenv()
 
+agent = create_agent(
+    model = model,
+    system_prompt= agent_system_prompt ,
+    tools=[calculate_right_refund, get_user_purchase_history,get_today_date,issue_refund_ticket],
+    response_format= Answer,
+    checkpointer=InMemorySaver()
+)
+
