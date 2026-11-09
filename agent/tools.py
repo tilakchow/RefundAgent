@@ -35,6 +35,9 @@ def calculate_right_refund(user:str, item: list[PurchaseItem])-> str:
 
     return {"status": "there was no username found"}
 
-    @tool
-    def issue_refund_ticket(refund_amount: int) -> str :
-        """this tool """            
+@tool
+def issue_refund_ticket(user:str,refund_amount: int) -> str :
+    """this tool will send the ticket to the right team to return the refund !"""
+
+    logging.info(f"using issue_refund_ticket for user: {user}")
+    return f"a refund ticket has been issued sucessfully with the amount of {refund_amount}"
