@@ -20,3 +20,7 @@ agent = create_agent(
     checkpointer=InMemorySaver()
 )
 
+def run_conversation() :
+    config = {"configurable": {"thread_id": str(uuid4())}}
+
+    question = HumanMessage(content="I would like to request ")
