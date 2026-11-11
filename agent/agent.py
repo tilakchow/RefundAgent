@@ -24,3 +24,20 @@ def run_conversation() :
     config = {"configurable": {"thread_id": str(uuid4())}}
 
     question = HumanMessage(content="I would like to request ")
+    conversation = True
+
+    while conversation :
+        response = agent.invoke({"messages":question},config=config)
+        structured_response = response["structured_response"]
+
+        print(structured_response.Answer)
+
+        conversation = structured_response.conversation
+
+        if conversation:
+            user_input = input("reply: \n")
+            question= HumanMessage(content= user_input)
+
+    print("the job is done !")        
+
+
