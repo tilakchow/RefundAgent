@@ -1,9 +1,8 @@
 from dotenv import load_dotenv
-from langchain.chat_models import init_chat_model
-from requests import Response
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-load_dotenv( )
-model = init_chat_model(model="openai/gpt-oss-120b" ,model_provider = "groq")
+load_dotenv()
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-##print(Response.content)
-
+#response = model.invoke("hello")
+#print(response.content[0]["text"])
