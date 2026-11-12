@@ -7,7 +7,7 @@ users_data = {
         },
         "pen": {
             "price": 7,
-            "date": "2026-10-3"
+            "date": "2026-11-3"
         }
     },
     "user124": {
@@ -29,15 +29,15 @@ users_data = {
     "user126": {
         "backpack": {
             "price": 45,
-            "date": "2026-10-2"
+            "date": "2026-11-2"
         },
         "water_bottle": {
             "price": 18,
-            "date": "2026-7-25"
+            "date": "2026-11-7"
         },
         "lunch_box": {
             "price": 14,
-            "date": "2026-10-10"
+            "date": "2026-10-30"
         }
     },
     "user127": {
