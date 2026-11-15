@@ -2,23 +2,28 @@ import sys
 from pathlib import Path
 from uuid import uuid4
 
-sys.path.insert(
-    0,
-    str(Path(__file__).resolve().parents[1] / "agent")
-)
+root_dir = Path(__file__).resolve().parents[1]
+for p in [str(root_dir), str(root_dir / "agent"), str(root_dir / "evaluations")]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
 
 from agent import agent
-from dataset import dataset
-from model import eval_model
+try:
+    from dataset import dataset
+    from model import eval_model
+except ImportError:
+    from evaluations.dataset import dataset
+    from evaluations.model import eval_model
 
 from deepeval.metrics import ToolCorrectnessMetric
 from deepeval.integrations.langchain import CallbackHandler
-from deepeval.test_case import LLMTestCase, ToolCall
+from deepeval.test_case import LLMTestCase, ToolCall, ToolCallParams
 from deepeval import evaluate
 from dotenv import load_dotenv
 
 load_dotenv()
 
+test_cases = []
 for golden in dataset.goldens:
     response = agent.invoke(
         {"messages": [{"role": "user", "content": golden.input}]},
@@ -29,8 +34,6 @@ for golden in dataset.goldens:
     actual_output = response["structured_response"].answer
 
     tools_called = []
-    test_cases = []
-
     for message in response["messages"]:
         for tool_call in getattr(message, "tool_calls", []) or []:
             tools_called.append(
@@ -44,8 +47,15 @@ for golden in dataset.goldens:
         expected_tools=golden.expected_tools
     )
 
-    dataset.add_test_case(test_case)
+    test_cases.append(test_case)
 
-metrics = [ToolCorrectnessMetric(threshold=0.8,model=eval_model,include_reason=True)]
+metrics = [
+    ToolCorrectnessMetric(
+        threshold=0.8,
+        model=eval_model,
+        include_reason=True,
+        evaluation_params=[ToolCallParams.INPUT_PARAMETERS]
+    )
+]
 
-evaluate(test_cases=dataset.test_cases, metrics=metrics)
+evaluate(test_cases=test_cases, metrics=metrics)
