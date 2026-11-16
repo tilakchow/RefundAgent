@@ -12,13 +12,11 @@ Refund agent that looks up purchase history, verifies the 30-day return policy, 
 |---|---|---|---|---|---|
 | Task Completion | Trace | 0.80 | 0.00 | 0.80 | PASS |
 | Step Efficiency | Trace | 0.80 | 0.50 | 1.00 | PASS |
-| Plan Quality | Trace | 0.80 | TODO | 1.00 | PASS |
-| Plan Adherence | Trace | 0.80 | TODO | 1.00 | PASS |
-| Tool Correctness | Single-turn | 0.90 | TODO | 1.00 | PASS |
+| Plan Quality | Trace | 0.80 | 1.00 | 1.00 | PASS |
+| Plan Adherence | Trace | 0.80 | 1.00 | 1.00 | PASS |
+| Tool Correctness | Single-turn | 0.90 | 1.00 | 1.00 | PASS |
 | Argument Correctness | Single-turn | 0.80 | 0.50 | 1.00 | PASS |
-| Answer Correctness [GEval] | Single-turn | 0.80 | TODO | 1.00 | PASS |
-
-> Before scores for Plan Quality, Plan Adherence, Tool Correctness, and Answer Correctness were not captured in the first run. Those 4 metrics were passing before the fix work began; TODO marks unknown numeric values.
+| Answer Correctness [GEval] | Single-turn | 0.80 | 1.00 | 1.00 | PASS |
 
 **Table 2 — Summary**
 
@@ -26,7 +24,7 @@ Refund agent that looks up purchase history, verifies the 30-day return policy, 
 |---|---|---|
 | Metrics passing (after) | 7 / 7 | 100% |
 | Metrics passing (before) | 4 / 7 | 57% |
-| Avg score before (known 3 failing) | (0.00 + 0.50 + 0.50) / 3 | 0.33 |
+| Avg score before (all 7) | (0.00 + 0.50 + 1.00 + 1.00 + 1.00 + 0.50 + 1.00) / 7 | 0.71 |
 | Avg score after (all 7) | (0.80 + 1.00 + 1.00 + 1.00 + 1.00 + 1.00 + 1.00) / 7 | 0.97 |
 | Tool calls per task | 4 → 3 | −1 call |
 | Eval runs for stability | 3 runs | Scores stable |
